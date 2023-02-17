@@ -31,10 +31,9 @@ const update = async (req, res) => {
 
 const deleteDog = async (req, res) => {
   try {
-    const numberOfRowsRemoved = await Dog.destroy(
-      { where: { id: req.params.id } }
-    )
-    res.status(200).json(numberOfRowsRemoved)
+    const dog = await Dog.findByPk(req.params.id)
+    await dog.destroy()
+    res.status(200).json(dog)
   } catch (error) {
     res.status(500).json(error)
   }
