@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Walking.belongsTo(models.Dog, {
+        foreignKey: 'dogId',
+      })
     }
   }
   Walking.init({

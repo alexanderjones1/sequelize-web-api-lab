@@ -1,4 +1,4 @@
-const { Dog } = require('../models')
+const { Dog, Walking } = require('../models')
 
 const create = async (req, res) => {
   try {
@@ -39,9 +39,20 @@ const deleteDog = async (req, res) => {
   }
 }
 
+const addWalking = async (req, res) => {
+  try {
+    req.body.dogId = req.params.id
+    const walking = await Walking.create(req.body)
+    res.status(200).json(walking)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 module.exports = {
   create,
   index,
   update,
-  delete: deleteDog
+  delete: deleteDog,
+  addWalking
 }
